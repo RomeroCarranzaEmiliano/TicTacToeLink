@@ -21,6 +21,10 @@ module.exports.routes = {
 
   '/': { view: 'pages/homepage' },
 
+  '/play': { view: 'pages/play', locals: {layout: 'layouts/play_l'} },
+
+  'post /server/create': 'ServerController.create',
+
 
   /***************************************************************************
   *                                                                          *

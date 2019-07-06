@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>New Sails App</title>
+    <title>TicTacToeLink | play</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     <!-- Viewport mobile tag for sensible mobile support -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -109,5 +110,13 @@
     <!--SCRIPTS-->
     <script src="/dependencies/sails.io.js"></script>
     <!--SCRIPTS END-->
+
+    <script type="text/javascript">
+      $('#play').click(function(){
+        io.socket.post('/server/create', '', function(data, data2){
+          //
+        });
+      });
+    </script>
   </body>
 </html>
