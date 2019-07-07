@@ -33,8 +33,7 @@ module.exports.bootstrap = async function() {
 
   //CREATION OF THE GLOBALS USED TO STORE GAMEDATA
   //==============================================
-  //...
-  //...
+  global.games = {};
   //==============================================
 
 };

@@ -12,7 +12,9 @@ module.exports = {
 			id: gameID,
 			board: [],
 			turn: 0,
-			players: []
+			players: [],
+			played: false,
+			time: 5000
 		};
 
 		//			[   A   ][   B   ][   C   ]
