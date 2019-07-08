@@ -12,12 +12,12 @@ module.exports = {
 
 		//BROADCASTING OF BOARD DATA
 		//==========================
-		console.log('board: '+game.board);
-		console.log('player1 chips: '+game.players[0].chips);
-		console.log('player1 chips: '+game.players[0].chips);
-		console.log('=======================================');
-		console.log('time: '+game.turn);
-		console.log('time: '+game.time);
+		//console.log('board: '+game.board);
+		//console.log('player1 chips: '+game.players[0].chips);
+		//console.log('player2 chips: '+game.players[1].chips);
+		//console.log('=======================================');
+		//console.log('turn: '+game.turn);
+		//console.log('time: '+game.time);
 		//==========================
 
 
@@ -34,8 +34,20 @@ module.exports = {
 			game = global.games[gameID];
 			//
 
-			//when it is this player's turn
-			if (game.turn == player) {
+			//
+			if (global.games[gameID].time == 1) {
+				//1ms left, do random move
+				var r = Math.floor((Math.random() * 10));
+				while (game.board[r] != 0) {
+					r = Math.floor((Math.random() * 10));
+				}
+				global.games[gameID].board[r] = 1+game.turn;
+				global.games[gameID].time = 0;
+				global.games[gameID].players[p].chips -= 1;
+				console.log('player'+player+' chips:'+ global.games[gameID].players[p].chips);//borrar
+				//
+			} else if (game.turn == player) {
+				//time left, run clock
 				global.games[gameID].time -= 1;
 			}
 			//

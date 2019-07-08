@@ -23,12 +23,17 @@ module.exports = {
 		playerC.playerInit(gameID, 1);
 		//
 
+		var channel = 'match-'+gameID; 
+
 		//mainloop
 		var mainloop = setInterval(function(){
 			//get gamedata and broadcast board to clients
 			global.games[gameID].played = false;
 			game = global.games[gameID];
 			playerC.upload(game);
+			//broadcast information
+			channel = 'match-'+gameID; 
+    		sails.sockets.broadcast(channel, 'update-board', game.board);
 			//
 
 			//turn handle
@@ -41,10 +46,17 @@ module.exports = {
 			}
 			//
 
-			if (game.players[1].chips == 0) { //all chips used
+			console.log(game.players);//borrar
+
+			if (game.players[0].chips == 0) { //all chips used
 				clearInterval(mainloop);
 			} 
 		}, 1);
+		//
+
+		//Get winner and broadcast
+
+
 		//
 
 

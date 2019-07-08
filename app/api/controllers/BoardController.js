@@ -20,10 +20,13 @@ module.exports = {
 		//			[   A   ][   B   ][   C   ]
 		var board = [0, 0, 0, 0, 0, 0, 0, 0, 0]; // 1(player 1) and 2(player 2)
 		
-		var player = {
+		var player1 = {
 			chips: 3
 		};
-		var players = [player, player];
+		var player2 = {
+			chips: 3
+		};
+		var players = [player1, player2];
 
 		game.board = board;
 		game.players = players;

@@ -113,10 +113,42 @@
 
     <script type="text/javascript">
       $('#play').click(function(){
-        io.socket.post('/server/create', '', function(data, data2){
+        var match = $('#match').val();
+        io.socket.post('/server/conn', {match}, function(data, data2){
           //
         });
       });
+
+
+
+      io.socket.on('update-board', function(data){
+        var board = data;
+        console.log(board);
+        $('#a0').val(board[0]);
+        $('#a1').val(board[1]);
+        $('#a2').val(board[2]);
+
+        $('#b0').val(board[3]);
+        $('#b1').val(board[4]);
+        $('#b2').val(board[5]);
+
+        $('#c0').val(board[6]);
+        $('#c1').val(board[7]);
+        $('#c2').val(board[8]);
+      });
+
+
     </script>
+
+    <style>
+      .c {
+        height: 20px; width: 20px;
+        transition-duration: 0.4s;
+      }
+      .c:hover {
+        border-color: blue;
+      }
+    </style>
+
   </body>
 </html>
