@@ -11,8 +11,20 @@ module.exports = {
 
   	var gameController = require('./GameController');
 
-  	var game_id = 'AAA000'; // !!! unique ID must be created instead
+    function makeid(length) {
+      var result           = '';
+      var characters       = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+      var charactersLength = characters.length;
+      for ( var i = 0; i < length; i++ ) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+      }
+      return result;
+    }
 
+
+  	var game_id = makeid(10); // !!! unique ID must be created instead
+
+    console.log(game_id);
 
   	var userIP = req.ip;
     var socketID = sails.sockets.getId(req);
@@ -23,12 +35,13 @@ module.exports = {
   		status: 'waiting'
   	}
 
+    /*
   	//Conn to game socket channel
     var channel = 'match-'+game_id; 
     sails.sockets.join(req, channel); //conn player to the channel
+  */ // <--- borrar?
 
-
-    res.ok();
+    return res.send(game_id);
 
   },
 
