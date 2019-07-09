@@ -46,8 +46,6 @@ module.exports = {
 			}
 			//
 
-			console.log(game.players);//borrar
-
 			if (game.players[0].chips == 0) { //all chips used
 				clearInterval(mainloop);
 			} 

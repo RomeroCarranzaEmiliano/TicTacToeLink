@@ -44,7 +44,6 @@ module.exports = {
 				global.games[gameID].board[r] = 1+game.turn;
 				global.games[gameID].time = 0;
 				global.games[gameID].players[p].chips -= 1;
-				console.log('player'+player+' chips:'+ global.games[gameID].players[p].chips);//borrar
 				//
 			} else if (game.turn == player) {
 				//time left, run clock

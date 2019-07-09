@@ -27,31 +27,28 @@ module.exports = {
     var channel = 'match-'+game_id; 
     sails.sockets.join(req, channel); //conn player to the channel
 
-    console.log('match created');//borrar
 
     res.ok();
 
   },
 
   conn: async function(req, res) {
-  	var userIP = req.ip;
-	var socketID = sails.sockets.getId(req);
+    var userIP = req.ip;
+    var socketID = sails.sockets.getId(req);
 
-	var game_id = req.body.match;
-	var gameID = game_id;
+    var game_id = req.body.match;
+    var gameID = game_id;
 
-	console.log(game_id);//borrar
+    global.rooms[gameID].player2.socket = socketID;
+    global.rooms[gameID].player2.ip = userIP;
+    global.rooms[gameID].player2.state = 'CON';
 
-	global.rooms[gameID].player2.socket = socketID;
-	global.rooms[gameID].player2.ip = userIP;
-	global.rooms[gameID].player2.state = 'CON';
-
-	//Conn to game socket channel
+    //Conn to game socket channel
     var channel = 'match-'+game_id; 
     sails.sockets.join(req, channel); //conn player to the channel
 
     var gameController = require('./GameController');
-	gameController.init(game_id);
+    gameController.init(game_id);
 
   }
 
