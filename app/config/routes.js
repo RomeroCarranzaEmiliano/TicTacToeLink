@@ -21,7 +21,7 @@ module.exports.routes = {
 
   '/': { view: 'pages/main', locals: {layout: 'layouts/main_l'} },
 
-  '/play': { view: 'pages/play', locals: {layout: 'layouts/play_l'} },
+  'get /play/:match': 'ServerController.onPutLink',
 
   'post /server/create': 'ServerController.create',
 

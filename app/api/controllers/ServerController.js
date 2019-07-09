@@ -15,7 +15,7 @@ module.exports = {
 
 
   	var userIP = req.ip;
-	var socketID = sails.sockets.getId(req);
+    var socketID = sails.sockets.getId(req);
 
   	global.rooms[game_id] = {
   		player1: {socket: socketID, ip: userIP, state: 'CON'},
@@ -39,17 +39,35 @@ module.exports = {
     var game_id = req.body.match;
     var gameID = game_id;
 
-    global.rooms[gameID].player2.socket = socketID;
-    global.rooms[gameID].player2.ip = userIP;
-    global.rooms[gameID].player2.state = 'CON';
+    var fullroom = false;
+    //check free seats and conn client to match
+    if (global.rooms[gameID].player1.state != 'CON') {
+      global.rooms[gameID].player1.socket = socketID;
+      global.rooms[gameID].player1.ip = userIP;
+      global.rooms[gameID].player1.state = 'CON';
+    } else {
+      global.rooms[gameID].player2.socket = socketID;
+      global.rooms[gameID].player2.ip = userIP;
+      global.rooms[gameID].player2.state = 'CON';
+      //the room is full, so start game
+      fullroom = true;
+    }
+    //
 
-    //Conn to game socket channel
+    //Conn to game's socket channel
     var channel = 'match-'+game_id; 
     sails.sockets.join(req, channel); //conn player to the channel
 
-    var gameController = require('./GameController');
-    gameController.init(game_id);
+    if (fullroom == true) {
+      var gameController = require('./GameController');
+      gameController.init(game_id);
+    }
 
+  },
+
+  onPutLink: function(req, res) {
+    var game_id = req.param('match');
+    return res.view('pages/play', { layout: 'layouts/play_l', match: game_id});
   }
 
 };
