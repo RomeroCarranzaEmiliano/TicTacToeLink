@@ -14,7 +14,9 @@ module.exports = {
 			turn: 0,
 			players: [],
 			played: false,
-			time: 5000
+			time: 5000,
+			animate: false,
+			score: [0, 0]
 		};
 
 		//			[   A   ][   B   ][   C   ]

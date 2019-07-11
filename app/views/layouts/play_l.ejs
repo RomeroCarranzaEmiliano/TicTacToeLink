@@ -116,6 +116,10 @@
         var match = $('#match').val();
         io.socket.post('/server/conn', {match}, function(data, data2){
           $('#me').val(data);
+          $('#vs').val(data + 1);
+          if (data + 1 == 2) {
+            $('#vs').val(0);
+          }
         });
       });
 
@@ -156,6 +160,15 @@
         } else {
           $('#time_vs_fill').css({'height': h+'%'});
         }
+      });
+
+      io.socket.on('update-score', function(data){
+        var score = data;
+        var me = $('#me').val();
+        var vs = $('#vs').val();
+        
+        $('#score_me').val('ME: '+score[me]);
+        $('#score_vs').val('OTHER: '+score[vs]);
       });
 
 
@@ -336,6 +349,11 @@
 
       }
 
+      #name_vs {
+        color: white;
+        position: fixed;
+        left: 65%; top: 30%;
+      }
       #time_vs {
 
         height: 49%; width: 1%;
@@ -358,6 +376,25 @@
 
       }
       
+      #score_me {
+        position: fixed;
+        top: 50%; left: 25%;
+
+        color: white;
+        border: none;
+        background-color: transparent;
+
+      }
+      #score_vs {
+        position: fixed;
+        top: 50%; left: 68%;
+
+        color: white;
+        border: none;
+        background-color: transparent;
+
+      }
+
       /*===========================================*/
 
     </style>
