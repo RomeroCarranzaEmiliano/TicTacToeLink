@@ -34,6 +34,8 @@ module.exports = {
 			//broadcast information
 			channel = 'match-'+gameID; 
     		sails.sockets.broadcast(channel, 'update-board', game.board);
+    		sails.sockets.broadcast(channel, 'update-turn', game.turn);
+    		sails.sockets.broadcast(channel, 'update-time', game.time);
 			//
 
 			//turn handle
