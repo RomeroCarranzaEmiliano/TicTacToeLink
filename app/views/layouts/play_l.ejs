@@ -198,6 +198,9 @@
 
 
 
+      io.socket.on('game-start', function(data){
+        $('#note').css({ 'visibility': 'hidden'});
+      });
 
       io.socket.on('update-board', function(data){
         var board = [];
@@ -240,7 +243,13 @@
         var score = data;
         var me = $('#me').val();
         var vs = $('#vs').val();
+
+        var score_me = (score[me]*100)/5;
+        var score_vs = (score[vs]*100)/5;
         
+        $('#table_me').css({'width': score_me+'%'});
+        $('#table_vs').css({'width': score_vs+'%'});
+
         $('#score_me').val('ME: '+score[me]);
         $('#score_vs').val('OTHER: '+score[vs]);
       });
@@ -256,18 +265,40 @@
         } else {
           $('#name_vs').css({'color':'green'});
         }
-
-  
         setTimeout(function() {
-          $('#name_me').css({'color':'white'});
-          $('#name_vs').css({'color':'white'});
+          $('#name_me').css({'color':'cyan'});
+          $('#name_vs').css({'color':'magenta'});
 
+        }, 250);
+        setTimeout(function() {
+          if (winner == me) {
+            $('#name_me').css({'color':'white'});
+          } else {
+            $('#name_vs').css({'color':'white'});
+          }
+        }, 500);
+        setTimeout(function() {
+          $('#name_me').css({'color':'cyan'});
+          $('#name_vs').css({'color':'magenta'});
+        }, 750);
+        setTimeout(function() {
+          if (winner == me) {
+            $('#name_me').css({'color':'green'});
+          } else {
+            $('#name_vs').css({'color':'green'});
+          }
         }, 1000);
+        setTimeout(function() {
+          $('#name_me').css({'color':'cyan'});
+          $('#name_vs').css({'color':'magenta'});
+        }, 1250);
+
+
         setTimeout(function() {
           io.socket.post('/player/animated', {match}, function(data, data2){
       
           });
-        }, 3000);
+        }, 1500);
         
       });
 
@@ -424,7 +455,7 @@
       }
 
       #name_me {
-        color: white;
+        color: cyan;
         position: fixed;
         left: 25%; top: 30%;
       }
@@ -451,7 +482,7 @@
       }
 
       #name_vs {
-        color: white;
+        color: magenta;
         position: fixed;
         left: 68%; top: 30%;
       }
@@ -496,6 +527,44 @@
 
       }
 
+      #table {
+        position: fixed;
+
+        width: 28%;
+        height: 10%;
+
+        left: 35%;
+        top: 82%;
+
+        border: 2px solid white;
+
+      }
+
+      #table_me {
+        position: absolute;
+        float: left;
+        width: 100%;
+        height: 50%;
+        margin:none;
+        background-color: cyan;
+      }
+      #table_vs {
+        position: absolute;
+        float: left;
+        width: 100%;
+        height: 50%;
+        margin:none;
+        top:50%;
+        background-color: magenta;
+      }
+
+      #note {
+        position: fixed;
+        left: 68%;
+        top: 40%;
+        width: 25%;
+        color: white;
+      }
       /*===========================================*/
 
     </style>

@@ -31,6 +31,8 @@ module.exports = {
 		var sum2 = [];
 		var winner = -1;
 
+		sails.sockets.broadcast(channel, 'game-start', '');
+
 		//mainloop
 		var mainloop = setInterval(function(){
 			//get gamedata and broadcast board to clients
@@ -141,7 +143,7 @@ module.exports = {
 					global.games[gameID].players[1].chips = 3;
 					winner = -1;
 
-				} else if (game.players[0].chips == 0) { //all chips used
+				} else if (game.players[0].chips == 0 && game.players[1].chips) { //all chips used
 					global.games[gameID].time = 5000;
 					global.games[gameID].board = [0, 0, 0, 0, 0, 0, 0, 0, 0];
 					global.games[gameID].players[0].chips = 3;
@@ -152,7 +154,13 @@ module.exports = {
 			}
 
 		}, 1);
-		//
+
+		if (global.games[gameID].score.includes(5)) {
+			setInterval(function() {
+				//delete global.rooms[gameID];
+				//delete global.games[gameID];
+			});
+		}
 
 
 	}  

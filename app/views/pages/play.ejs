@@ -19,8 +19,8 @@
 	<input class='c' id='c2' readonly='readonly'>
 </div>
 <div id='score'>
-	<input id='score_me' value='ME: ' readonly='readonly'>
-	<input id='score_vs' value='OTHER: ' readonly='readonly'>
+	<input id='score_me' value='ME: ' readonly='readonly' type='hidden'>
+	<input id='score_vs' value='OTHER: ' readonly='readonly' type='hidden'>
 </div>
 
 
@@ -40,6 +40,12 @@
 	<div id='time_vs_fill'></div>
 </div>
 
+<div id='table'>
+<div id='table_me'></div>
+<div id='table_vs'></div>
+</div>
+
+<div id='note'>Share this page url with someone and start playing</div>
 
 <button class='btn' id='main'>main</button>
 <div class='btn' id='by' onclick="openInNewTab('https://github.com/RomeroCarranzaEmiliano/TicTacToeLink');">emiliano romero carranza</div>

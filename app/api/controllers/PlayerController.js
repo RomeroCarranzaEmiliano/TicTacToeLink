@@ -61,6 +61,12 @@ module.exports = {
 			}
 			//
 
+			//if a player's score reach 5, finish player conn
+			if (global.games[gameID].score.includes(5)) {
+				clearInterval(conn);
+			}
+
+
 		}, 1);
 		//==================================
 
