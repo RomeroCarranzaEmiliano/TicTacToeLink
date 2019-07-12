@@ -29,6 +29,8 @@ module.exports.routes = {
 
   'post /player/move': 'PlayerController.move',
 
+  'post /player/animated': 'PlayerController.animated',
+
 
 
   /***************************************************************************

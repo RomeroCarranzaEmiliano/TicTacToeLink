@@ -54,7 +54,7 @@ module.exports = {
 				global.games[gameID].time = 0;
 				global.games[gameID].players[p].chips -= 1;
 				//
-			} else if (game.turn == player) {
+			} else if (game.turn == player && game.animate == false) {
 				global.games[gameID].players[game.turn].call = -1;
 				//time left, run clock
 				global.games[gameID].time -= 1;
@@ -101,6 +101,23 @@ module.exports = {
 			global.games[gameID].players[p].call = -1;
 		}
 		
+	},
+
+	animateWin: async function(gameID, winner) {
+
+		var channel = 'match-'+gameID; 
+		var game = global.games[gameID];
+		global.games[gameID].animate = true;
+		sails.sockets.broadcast(channel, 'show-parcial-winner', winner);
+
+	},
+
+	animated: async function(req, res) {
+		var gameID = req.body.match;
+
+
+		global.games[gameID].animate = false;
+
 	}
 
 };

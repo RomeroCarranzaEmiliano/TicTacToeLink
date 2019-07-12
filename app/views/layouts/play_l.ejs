@@ -123,6 +123,17 @@
         });
       });
 
+      //menus
+      //=======================
+      $('#main').click(function(){
+        window.location.href = "/";
+      });
+      function openInNewTab(url) {
+        var win = window.open(url, '_blank');
+        win.focus();
+      }
+      //=======================
+
 
       //MOVES
       //===========================================================================
@@ -233,6 +244,33 @@
         $('#score_me').val('ME: '+score[me]);
         $('#score_vs').val('OTHER: '+score[vs]);
       });
+
+      io.socket.on('show-parcial-winner', function(data){
+        var winner = data;
+        var match = $('#match').val();
+        var me = $('#me').val();
+        var vs = $('#vs').val();
+        
+        if (winner == me) {
+          $('#name_me').css({'color':'green'});
+        } else {
+          $('#name_vs').css({'color':'green'});
+        }
+
+  
+        setTimeout(function() {
+          $('#name_me').css({'color':'white'});
+          $('#name_vs').css({'color':'white'});
+
+        }, 1000);
+        setTimeout(function() {
+          io.socket.post('/player/animated', {match}, function(data, data2){
+      
+          });
+        }, 3000);
+        
+      });
+
 
 
 
