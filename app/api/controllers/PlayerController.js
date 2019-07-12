@@ -26,12 +26,21 @@ module.exports = {
 	playerInit: async function(gameID, player) {
 		var p = player; //to identify the player
 
+		var c;
 		var game;
 		//This handle the conn to the client
 		//==================================
 		var conn = setInterval(function(){
 			//get data
 			game = global.games[gameID];
+			//
+
+			//get player's call
+			if (global.games[gameID].players[game.turn].call != -1) {
+				c = global.games[gameID].players[game.turn].call;
+				global.games[gameID].board[c] = 1+game.turn;
+				global.games[gameID].time = 0;
+			}
 			//
 
 			//
@@ -46,6 +55,7 @@ module.exports = {
 				global.games[gameID].players[p].chips -= 1;
 				//
 			} else if (game.turn == player) {
+				global.games[gameID].players[game.turn].call = -1;
 				//time left, run clock
 				global.games[gameID].time -= 1;
 			}
@@ -54,6 +64,43 @@ module.exports = {
 		}, 1);
 		//==================================
 
+	},
+
+	move: async function(req, res) {
+		var gameID = req.body.match;
+		var move = req.body.move;
+		var p = req.body.me;
+
+		var ip = req.ip;
+    	var socket = sails.sockets.getId(req);
+
+		//check if the player belongs to the game
+		//check if the move is allowed
+		
+		var allowed = false;
+		var game = global.games[gameID];
+		if (game.board[move] == 0) {
+			allowed = true;
+		}
+		
+		var room = global.rooms[gameID];
+		var p1 = room.player1;
+		var p2 = room.player2;
+		var allowed2 = false;
+		if (socket == p1.socket || socket == p2.socket) {
+			allowed2 = true;
+		}
+		if (ip == p1.ip || ip == p2.ip) {
+			allowed2 = true;
+		}
+		
+
+		if (allowed == true && allowed2 == true) {
+			global.games[gameID].players[p].call = move;
+		} else {
+			global.games[gameID].players[p].call = -1;
+		}
+		
 	}
 
 };

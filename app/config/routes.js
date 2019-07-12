@@ -27,6 +27,9 @@ module.exports.routes = {
 
   'post /server/conn': 'ServerController.conn',
 
+  'post /player/move': 'PlayerController.move',
+
+
 
   /***************************************************************************
   *                                                                          *

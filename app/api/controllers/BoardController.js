@@ -23,10 +23,12 @@ module.exports = {
 		var board = [0, 0, 0, 0, 0, 0, 0, 0, 0]; // 1(player 1) and 2(player 2)
 		
 		var player1 = {
-			chips: 3
+			chips: 3,
+			call: -1
 		};
 		var player2 = {
-			chips: 3
+			chips: 3,
+			call: -1
 		};
 		var players = [player1, player2];
 

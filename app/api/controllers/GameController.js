@@ -50,10 +50,12 @@ module.exports = {
 			}
 
 
-			
+
 
 			//turn handle
 			if (game.time <= 0) {
+				global.games[gameID].players[0].call = -1;
+				global.games[gameID].players[1].call = -1;
 				global.games[gameID].turn += 1;
 				if (global.games[gameID].turn == 2) {
 					global.games[gameID].turn = 0;

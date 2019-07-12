@@ -124,6 +124,69 @@
       });
 
 
+      //MOVES
+      //===========================================================================
+      $('#a0').click(function(){
+        var match = $('#match').val();
+        var move = 0;
+        var me = $('#me').val();
+        io.socket.post('/player/move', {match, move, me}, function(data, data2){});
+      });
+      $('#a1').click(function(){
+        var match = $('#match').val();
+        var move = 1;
+        var me = $('#me').val();
+        io.socket.post('/player/move', {match, move, me}, function(data, data2){});
+      });
+      $('#a2').click(function(){
+        var match = $('#match').val();
+        var move = 2;
+        var me = $('#me').val();
+        io.socket.post('/player/move', {match, move, me}, function(data, data2){});
+      });
+
+      $('#b0').click(function(){
+        var match = $('#match').val();
+        var move = 3;
+        var me = $('#me').val();
+        io.socket.post('/player/move', {match, move, me}, function(data, data2){});
+      });
+      $('#b1').click(function(){
+        var match = $('#match').val();
+        var move = 4;
+        var me = $('#me').val();
+        io.socket.post('/player/move', {match, move, me}, function(data, data2){});
+      });
+      $('#b2').click(function(){
+        var match = $('#match').val();
+        var move = 5;
+        var me = $('#me').val();
+        io.socket.post('/player/move', {match, move, me}, function(data, data2){});
+      });
+
+      $('#c0').click(function(){
+        var match = $('#match').val();
+        var move = 6;
+        var me = $('#me').val();
+        io.socket.post('/player/move', {match, move, me}, function(data, data2){});
+      });
+      $('#c1').click(function(){
+        var match = $('#match').val();
+        var move = 7;
+        var me = $('#me').val();
+        io.socket.post('/player/move', {match, move, me}, function(data, data2){});
+      });
+      $('#c2').click(function(){
+        var match = $('#match').val();
+        var move = 8;
+        var me = $('#me').val();
+        io.socket.post('/player/move', {match, move, me}, function(data, data2){});
+      });
+      //===========================================================================
+
+
+
+
 
       io.socket.on('update-board', function(data){
         var board = [];
@@ -352,7 +415,7 @@
       #name_vs {
         color: white;
         position: fixed;
-        left: 65%; top: 30%;
+        left: 68%; top: 30%;
       }
       #time_vs {
 
