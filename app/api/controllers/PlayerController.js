@@ -106,6 +106,8 @@ module.exports = {
 		} else {
 			global.games[gameID].players[p].call = -1;
 		}
+
+		global.games[gameID].players[p].chips -= 1;
 		
 	},
 

@@ -9,7 +9,7 @@ module.exports = {
 
 	init: async function(gameID) {
 
-		//var for comunication with controllers
+		//variables for comunication with other controllers
 		var boardC = require('./BoardController');
 		var playerC = require('./PlayerController');
 		//
@@ -83,16 +83,16 @@ module.exports = {
 					}
 				}
 
-					sum1[0] = board1[0] + board1[3] + board1[6];
+				sum1[0] = board1[0] + board1[3] + board1[6];
 				sum1[1] = board1[1] + board1[4] + board1[7];
 				sum1[2] = board1[2] + board1[5] + board1[8];
 
-					sum2[0] = board2[0] + board2[3] + board2[6];
+				sum2[0] = board2[0] + board2[3] + board2[6];
 				sum2[1] = board2[1] + board2[4] + board2[7];
 				sum2[2] = board2[2] + board2[5] + board2[8];
 
 
-						if (sum1.includes(3) == true) {
+				if (sum1.includes(3) == true) {
 					winner = 0;
 				}
 				if (sum2.includes(3) == true) {
@@ -142,8 +142,8 @@ module.exports = {
 					global.games[gameID].players[0].chips = 3;
 					global.games[gameID].players[1].chips = 3;
 					winner = -1;
-
-				} else if (game.players[0].chips == 0 && game.players[1].chips) { //all chips used
+				}
+				if (game.players[0].chips == 0 && game.players[1].chips == 0) { //all chips used
 					global.games[gameID].time = 5000;
 					global.games[gameID].board = [0, 0, 0, 0, 0, 0, 0, 0, 0];
 					global.games[gameID].players[0].chips = 3;
@@ -152,6 +152,7 @@ module.exports = {
 				}
 
 			}
+
 
 		}, 1);
 
